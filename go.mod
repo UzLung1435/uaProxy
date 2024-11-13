@@ -12,6 +12,7 @@ require (
 
 require (
 	github.com/adrg/xdg v0.5.0 // indirect
+	github.com/digineo/go-uci v0.0.0-20210918132103-37c7b10c14fa // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect

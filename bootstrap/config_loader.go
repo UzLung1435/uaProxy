@@ -5,10 +5,12 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+	"github.com/digineo/go-uci"
 )
 
 // Config holds the configuration options
@@ -29,15 +31,23 @@ func LoadConfig() {
 	logrus.SetReportCaller(true)
 }
 
+func getUciValue(sectionGroup string, sectionOption string) string{
+	if values, ok := uci.Get("uaproxy",sectionGroup,sectionOption); ok{
+		cuc := strings.Join(values, "")
+		return cuc
+	}
+	return "MicroMessenger Client"
+}
+
 func parseFlags() {
 	exePath, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
 	csvPath := filepath.Join(filepath.Dir(exePath), "stats-config.csv")
-
+	custom_ua := getUciValue("custom","ua")
 	pflag.String("redir-port", "12345", "listen address")
-	pflag.String("User-Agent", "MicroMessenger Client", "User-Agent value")
+	pflag.String("User-Agent", custom_ua, "User-Agent value")
 	pflag.Bool("debug", false, "debug mode")
 	pflag.Bool("stats", false, "enable statistics collection")
 	pflag.String("stats-config", csvPath, "configuration file")

@@ -31,6 +31,8 @@ uaProxy 是一个基于 Go 的高性能代理程序，能够高效监控和修�
     - 使用 `systemctl enable uaProxy` 开机自启
     - (可选)使用 `systemctl status uaProxy.service` 查看日志
 
+  - 添加custom ua
+    - 将config下的[uaproxy](./config/uaproxy)放到`/etc/config/`下
 
 3. 为了实现所有TCP流量会经过uaProxy, iptables要这样设置
 ```sh
